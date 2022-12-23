@@ -28,6 +28,7 @@ class selection_type(Enum):
 
 class genetic_algorithm():
     def __init__(self, parameter):
+        self.jap = parameter['jap']
         self.popSize = parameter['popSize']
         self.geneSize = parameter['geneSize']
         self.mutationRate = parameter['mutationRate']
@@ -40,4 +41,18 @@ class genetic_algorithm():
         self.chromosome = np.zeros((self.popSize, self.geneSize), dtype=int)
         for i in range(self.popSize):
             self.chromosome[i] = np.random.permutation(self.geneSize)
-            print(self.chromosome[i])
+            # print(self.chromosome[i])
+        self.fitness = np.zeros(self.popSize, dtype=int)
+        self.compute_fitness()
+        # print(self.fitness)
+    
+    def compute_fitness(self):
+        for i in range(self.popSize):
+            self.fitness[i] = self.jap.compute_times(self.chromosome[i])
+        maxinum = np.max(self.fitness)
+        # print(maxinum)
+        # print(self.fitness)
+        # print("fitness")
+        for i in range(self.popSize):
+            self.fitness[i] = maxinum - self.fitness[i]
+        # print(self.fitness)
