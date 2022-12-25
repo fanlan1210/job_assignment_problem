@@ -24,6 +24,7 @@ gaParameter = {
 
 solution = genetic_algorithm(gaParameter)
 solution.initialize()
+solution.mutation()
 # solution.compute_fitness()
 # print(gaPara)
 # 跑多次 找 平均 標準差 收斂

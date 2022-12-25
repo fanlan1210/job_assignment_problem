@@ -42,8 +42,8 @@ class genetic_algorithm():
         for i in range(self.popSize):
             self.chromosome[i] = np.random.permutation(self.geneSize)
             # print(self.chromosome[i])
-        self.fitness = np.zeros(self.popSize, dtype=int)
-        self.compute_fitness()
+        # self.fitness = np.zeros(self.popSize, dtype=int)
+        # self.compute_fitness()
         # print(self.fitness)
     
     def compute_fitness(self):
@@ -56,3 +56,12 @@ class genetic_algorithm():
         for i in range(self.popSize):
             self.fitness[i] = maxinum - self.fitness[i]
         # print(self.fitness)
+
+    # def cross_over(self):
+    def mutation(self):
+        for i in range(np.size(self.chromosome, 0)):
+            for j in range(self.geneSize):
+                if random.randint(0, 101) <= self.mutationRate * 100:
+                    targetIdx = random.randint(1, self.geneSize) - 1
+                    self.chromosome[i][j], self.chromosome[i][targetIdx] = \
+                        self.chromosome[i][targetIdx], self.chromosome[i][j]
