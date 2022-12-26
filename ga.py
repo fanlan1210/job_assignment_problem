@@ -1,7 +1,8 @@
-from enum import Enum
-import random
 import copy
+import random
 import numpy as np
+from enum import Enum
+from visual_data import *
 
 class jap():
     def __init__(self, timeTable: list = None, N: int = 10, MAX_VAL: int = 10):
@@ -10,6 +11,7 @@ class jap():
         else:
             timeTable = [[int(x) for x in i] for i in timeTable]
         self.timeTable = timeTable
+        random.seed()
 
     def compute_times(self, jobs):
         val = 0
@@ -40,19 +42,25 @@ class genetic_algorithm():
         self.crossoverType = parameter['crossoverType']
     
     def initialize(self):
+        self.plt = visual_data()
         self.chromosome = np.zeros((self.popSize, self.geneSize), dtype=int)
         for i in range(self.popSize):
             self.chromosome[i] = np.random.permutation(self.geneSize)
         self.bestSol = self.chromosome[0]
         self.bestSolTimes = self.jap.compute_times(self.bestSol)
-        self.update_best()
 
     def update_best(self):
+        mn = 99999999
+        mx = -1
         for i in range(self.popSize):
             curTime = self.jap.compute_times(self.chromosome[i])
+            mn = min(mn, curTime)
+            mx = max(mx, curTime)
             if curTime < self.bestSolTimes:
                 self.bestSolTimes = curTime
                 self.bestSol = self.chromosome[i]
+        self.plt.append('min', mn)
+        self.plt.append('max', mx)
 
     def compute_fitness(self):
         self.fitness = np.zeros(np.size(self.chromosome, 0), dtype=int)
@@ -106,6 +114,7 @@ class genetic_algorithm():
     def crossover(self):
         self.childList = []
         rng = self.popSize - self.popSize % 2
+        self.chromosome = np.random.permutation(self.chromosome)
         for i in range(0, rng, 2):
             if self.crossoverType == crossover_type.PartialCrossover:
                 self.partial_crossover(i, i + 1)

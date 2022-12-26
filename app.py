@@ -1,6 +1,7 @@
-import random
+import os
 import csv
-import matplotlib.pyplot as plt
+import random
+import shutil
 from ga import *
 
 #table[x][y] -> time for machine x doing jobs y
@@ -9,6 +10,31 @@ from ga import *
 
 #jobs[x] -> machine x do jobs[x]
 
+def run_ga(solution: genetic_algorithm):
+    for _ in range(gaParameter['liveLoops']):
+        solution.crossover()
+        solution.mutation()
+        solution.selection()
+        solution.update_best()
+        solution.plt.append('best', solution.bestSolTimes)
+        # print(solution.bestSolTimes)
+    # 跑多次 找 平均 標準差 收斂
+
+def rm(path: str):
+    shutil.rmtree(f'figure/{path}')
+    os.mkdir(f'figure/{path}')
+
+def remove_exist_file():
+    rm('best')
+    rm('minmax')
+
+def draw_plt(bestSolTime: list):
+    plt.plot(bestSolTime)
+    plt.title('every loops best value')
+    plt.xlabel('loop i')
+    plt.ylabel('best value')  
+    plt.savefig(f'figure/every-loop-best.png')
+    print(f'avrage: {np.average(bestSolTime)} std: {np.std(bestSolTime)}')
 
 if __name__ == '__main__':
     table = None
@@ -22,9 +48,9 @@ if __name__ == '__main__':
     japProblem = jap(table)
 
     gaParameter = {
-        'loops' : 20,
+        'liveLoops' : 50,
         'jap' : japProblem,
-        'popSize' : 8,
+        'popSize' : 5,
         'geneSize' : len(table),
         'mutationRate' : 0.1,
         'selectionRate' : 0.1,
@@ -33,14 +59,19 @@ if __name__ == '__main__':
         'crossoverType' : crossover_type.PartialCrossover
     }
 
-    solution = genetic_algorithm(gaParameter)
-    solution.initialize()
+    loops = 10
+    data = []
+    bestSolTime = []
+    remove_exist_file()
+    
+    for i in range(loops):
+        solution = genetic_algorithm(gaParameter)
+        solution.initialize()
+        run_ga(solution)
+        data.append(solution.plt)
+        data[i].show(show_type.Best, i)
+        data[i].show(show_type.MinMax, i)
+        print(f'loop {i} best Solution: {solution.bestSol}, time: {solution.bestSolTimes}')
+        bestSolTime.append(solution.bestSolTimes)
 
-    for _ in range(gaParameter['loops']):
-        solution.crossover()
-        solution.mutation()
-        # solution.compute_fitness() //selection 有跑了
-        solution.selection()
-        solution.update_best()
-        print(solution.bestSolTimes)
-    # 跑多次 找 平均 標準差 收斂
+    draw_plt(bestSolTime)

@@ -37,7 +37,3 @@ def test_is_child_element_repeat():
             else:
                 print(solution.childList[i])
                 raise 'cc'
-
-
-
-
