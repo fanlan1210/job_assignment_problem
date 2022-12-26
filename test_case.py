@@ -15,6 +15,12 @@ def test_is_child_element_repeat():
         'selectionType' : selection_type.Deterministic,
         'crossoverType' : crossover_type.OrderCrossover
     }
+    
+    # with open('data.csv', 'w', newline='') as f:
+    #     sap = jap(None, 8, 100)
+    #     csvwriter = csv.writer(f)
+    #     for i in sap.timeTable:
+    #         csvwriter.writerow(i)
 
     solution = genetic_algorithm(gaParameter)
     solution.initialize()

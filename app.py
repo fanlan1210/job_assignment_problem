@@ -24,19 +24,23 @@ if __name__ == '__main__':
     gaParameter = {
         'loops' : 20,
         'jap' : japProblem,
-        'popSize' : 5,
+        'popSize' : 8,
         'geneSize' : len(table),
-        'mutationRate' : 1,
+        'mutationRate' : 0.1,
         'selectionRate' : 0.1,
         'mutationType' : mutation_type.Inversion,
-        'selectionType' : selection_type.RouletteWheel,
+        'selectionType' : selection_type.Deterministic,
         'crossoverType' : crossover_type.PartialCrossover
     }
-    # for _ in range(parameter['loops']):
+
     solution = genetic_algorithm(gaParameter)
     solution.initialize()
-    solution.crossover()
-    solution.mutation()
-    solution.compute_fitness()
-    solution.selection()
+
+    for _ in range(gaParameter['loops']):
+        solution.crossover()
+        solution.mutation()
+        # solution.compute_fitness() //selection 有跑了
+        solution.selection()
+        solution.update_best()
+        print(solution.bestSolTimes)
     # 跑多次 找 平均 標準差 收斂
