@@ -26,7 +26,7 @@ class mutation_type(Enum):
     
 class selection_type(Enum):
     Deterministic = 1
-    Stochastic= 2
+    RouletteWheel = 2
 
 class genetic_algorithm():
     def __init__(self, parameter):
@@ -43,7 +43,7 @@ class genetic_algorithm():
         self.chromosome = np.zeros((self.popSize, self.geneSize), dtype=int)
         for i in range(self.popSize):
             self.chromosome[i] = np.random.permutation(self.geneSize)
-        self.fitness = np.zeros(self.popSize + self.popSize, dtype=int)
+        self.fitness = np.zeros(self.popSize + self.popSize - self.popSize % 2, dtype=int)
 
     def compute_fitness(self):
         for i in range(np.size(self.chromosome, 0)):
@@ -117,4 +117,21 @@ class genetic_algorithm():
                 if self.mutationType == mutation_type.Inversion:
                     self.mutationInverse(i)
                 if self.mutationType == mutation_type.Swap:
-                    self.mutationSwap(i) 
+                    self.mutationSwap(i)
+    
+    def selectionDeterministic(self):
+        lst = sorted(range(len(self.fitness)), key=lambda k: self.fitness[k])
+        a = [self.chromosome[i] for i in lst]
+        self.chromosome = np.array(a[:self.popSize])
+
+    def selectionRouletteWheel(self):
+        self.fitness = self.fitness / np.sum(self.fitness)
+        self.chromosome = self.chromosome[np.random.choice(np.size(self.chromosome, 0), self.popSize, replace=False, p=self.fitness)]
+
+    def selection(self):
+        self.compute_fitness()
+        if self.selectionType == selection_type.Deterministic:
+            self.selectionDeterministic()
+
+        if self.selectionType == selection_type.RouletteWheel:
+            self.selectionRouletteWheel() 
