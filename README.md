@@ -48,4 +48,4 @@ gaParameter = {
 - minmax : 同 best ，內容改爲每代中最大和最小的成本
   + ![image](figure/minmax/loop0.png)
 - every-loop-best.png : 每次基因演算法找到最佳解的值
-  + ![image](figure/every-loop-best.png)
+  + ![image](figure/every-loop-best.png =50%x)
