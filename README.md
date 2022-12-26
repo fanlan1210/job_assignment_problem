@@ -40,3 +40,9 @@ gaParameter = {
 - crossoverType : 交配方法，放在 crossover_type
   + PartialCrossover : 兩兩基因交配，方法爲選一區間[L, R]整段交換，產生兩個小孩，再去重
 
+# figure 
+
+用 matplotlib 畫的圖都存在 ./figure 下
+- best : 有幾個 loops 就有幾張圖片，爲基因演算法每代當前的最佳答案所花費之成本
+- minmax : 同 best ，內容改爲每代中最大和最小的成本
+- every-loop-best.png : 每次基因演算法找到最佳解的值
