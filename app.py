@@ -17,8 +17,6 @@ def run_ga(solution: genetic_algorithm):
         solution.selection()
         solution.update_best()
         solution.plt.append('best', solution.bestSolTimes)
-        # print(solution.bestSolTimes)
-    # 跑多次 找 平均 標準差 收斂
 
 def rm(path: str):
     shutil.rmtree(f'figure/{path}')
@@ -29,11 +27,17 @@ def remove_exist_file():
     rm('minmax')
 
 def draw_plt(bestSolTime: list):
+    try:
+        os.remove('figure/every-loop-best.png')
+    except:
+        pass
+
     plt.plot(bestSolTime)
     plt.title('every loops best value')
     plt.xlabel('loop i')
     plt.ylabel('best value')  
-    plt.savefig(f'figure/every-loop-best.png')
+    plt.savefig('figure/every-loop-best.png')
+    plt.close()
     print(f'avrage: {np.average(bestSolTime)} std: {np.std(bestSolTime)}')
 
 if __name__ == '__main__':
@@ -48,18 +52,17 @@ if __name__ == '__main__':
     japProblem = jap(table)
 
     gaParameter = {
-        'liveLoops' : 50,
+        'liveLoops' : 10,
         'jap' : japProblem,
         'popSize' : 5,
-        'geneSize' : len(table),
+        'geneSize' : len(japProblem.timeTable),
         'mutationRate' : 0.1,
-        'selectionRate' : 0.1,
         'mutationType' : mutation_type.Inversion,
         'selectionType' : selection_type.Deterministic,
         'crossoverType' : crossover_type.PartialCrossover
     }
 
-    loops = 10
+    loops = 50
     data = []
     bestSolTime = []
     remove_exist_file()

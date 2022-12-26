@@ -36,7 +36,6 @@ class genetic_algorithm():
         self.popSize = parameter['popSize']
         self.geneSize = parameter['geneSize']
         self.mutationRate = parameter['mutationRate']
-        self.selectionRate = parameter['selectionRate']
         self.mutationType = parameter['mutationType']
         self.selectionType = parameter['selectionType']
         self.crossoverType = parameter['crossoverType']
@@ -74,9 +73,6 @@ class genetic_algorithm():
         leftBound = random.randint(0, self.geneSize - 2)
         rightBound = random.randint(leftBound + 1, self.geneSize - 1)
         return leftBound, rightBound
-
-    def shuffle(self):
-        pass
 
     def partial_crossover(self, p1: int, p2: int):
         childList = self.childList
