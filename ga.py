@@ -60,6 +60,7 @@ class genetic_algorithm():
                 self.bestSol = self.chromosome[i]
         self.plt.append('min', mn)
         self.plt.append('max', mx)
+        self.plt.append('dif', mx - mn)
 
     def compute_fitness(self):
         self.fitness = np.zeros(np.size(self.chromosome, 0), dtype=int)

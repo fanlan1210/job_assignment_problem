@@ -32,9 +32,10 @@ class visual_data():
     def show_min_max(self, i: int):
         plt.plot(self.data['max'], label='max', marker='o')
         plt.plot(self.data['min'], label='min', marker='o')
+        plt.plot(self.data['dif'], label='diff', marker='o')
         plt.title('min and max time')
         plt.xlabel('times')
-        plt.ylabel('min and max')                                
+        plt.ylabel('cost')                                
         plt.gca().xaxis.set_major_locator(MaxNLocator(integer=True))
         plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
         plt.legend()
