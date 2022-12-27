@@ -25,7 +25,7 @@ class visual_data():
         plt.gca().yaxis.set_major_locator(MaxNLocator(integer=True))
         minIdx = np.argmin(self.data['best'])
         plt.annotate('{}'.format(self.data['best'][minIdx]), xy=(minIdx, self.data['best'][minIdx]), xytext=(minIdx, self.data['best'][minIdx] + 2))
-        plt.savefig(f'figure/best/loop{i}.png')
+        plt.savefig('figure/best/loop%.2d.png' % (i))
         # plt.show()
         plt.close()
 
@@ -40,7 +40,7 @@ class visual_data():
         plt.legend()
         minIdx = np.argmin(self.data['min'])
         plt.annotate('{}'.format(self.data['min'][minIdx]), xy=(minIdx, self.data['min'][minIdx]), xytext=(minIdx, self.data['min'][minIdx] + 2))
-        plt.savefig(f'figure/minmax/loop{i}.png')
+        plt.savefig('figure/minmax/loop%.2d.png' % (i))
         # plt.show()
         plt.close()
 
