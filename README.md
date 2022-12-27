@@ -19,8 +19,8 @@ gaParameter = {
         'jap' : japProblem,
         'popSize' : 5,
         'geneSize' : len(japProblem.timeTable),
-        'mutationRate' : 0.1,  #變異率
-        'mutationType' : mutation_type.Inversion,  #mutation_type.Inversion 
+        'mutationRate' : 0.1,
+        'mutationType' : mutation_type.Inversion,
         'selectionType' : selection_type.Deterministic,
         'crossoverType' : crossover_type.PartialCrossover
     }
