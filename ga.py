@@ -1,13 +1,19 @@
+import csv
 import copy
 import random
 import numpy as np
 from enum import Enum
 from visual_data import *
+from scipy.optimize import linear_sum_assignment
 
 class jap():
     def __init__(self, timeTable: list = None, N: int = 10, MAX_VAL: int = 10):
         if timeTable == None:
             timeTable = [[random.randint(1, MAX_VAL) for i in range(N)] for j in range(N)]
+            with open('data.csv', 'w', newline='') as f:
+                writer = csv.writer(f)
+                for i in timeTable:
+                    writer.writerow(i)
         else:
             timeTable = [[int(x) for x in i] for i in timeTable]
         self.timeTable = timeTable
@@ -18,6 +24,11 @@ class jap():
         for i, v in enumerate(jobs):
             val += self.timeTable[i][v]
         return val
+
+    def compute_solution(self):
+        cost = np.array(self.timeTable)
+        r, c = linear_sum_assignment(cost)
+        print(f'best soultion: {c}, best time: {cost[r, c].sum()}')
 
 class crossover_type(Enum) :
     PartialCrossover = 1

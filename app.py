@@ -4,7 +4,7 @@ import random
 import shutil
 from ga import *
 
-#table[x][y] -> time for machine x doing jobs y
+#table[x][y] -> time of machine y process job x
 # table = [[1, 2], 
 #         [4, 8]]
 
@@ -50,6 +50,7 @@ if __name__ == '__main__':
         pass
 
     japProblem = jap(table)
+    # japProblem = jap(None, N=10, MAX_VAL=20)
 
     gaParameter = {
         'liveLoops' : 20,
@@ -66,7 +67,7 @@ if __name__ == '__main__':
     data = []
     bestSolTime = []
     remove_exist_file()
-    
+    solution = None
     for i in range(loops):
         solution = genetic_algorithm(gaParameter)
         solution.initialize()
@@ -78,3 +79,4 @@ if __name__ == '__main__':
         bestSolTime.append(solution.bestSolTimes)
 
     draw_plt(bestSolTime)
+    solution.jap.compute_solution()
