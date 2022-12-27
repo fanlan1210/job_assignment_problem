@@ -50,7 +50,3 @@ class visual_data():
         
         if type == show_type.MinMax:
             self.show_min_max(i)
-        
-
-
-    

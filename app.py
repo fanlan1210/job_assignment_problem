@@ -52,9 +52,9 @@ if __name__ == '__main__':
     japProblem = jap(table)
 
     gaParameter = {
-        'liveLoops' : 10,
+        'liveLoops' : 20,
         'jap' : japProblem,
-        'popSize' : 5,
+        'popSize' : 50,
         'geneSize' : len(japProblem.timeTable),
         'mutationRate' : 0.1,
         'mutationType' : mutation_type.Inversion,
@@ -62,7 +62,7 @@ if __name__ == '__main__':
         'crossoverType' : crossover_type.PartialCrossover
     }
 
-    loops = 50
+    loops = 10
     data = []
     bestSolTime = []
     remove_exist_file()
