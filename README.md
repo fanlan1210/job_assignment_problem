@@ -2,6 +2,14 @@
 
 使用不同演算法來最佳化工作指派問題，目前只寫基因演算法，其他演算法有空再來補
 
+## Requirements
+
+- shutil
+- numpy
+- scipy
+- matplotlib
+- pytest (如果你要測的話)
+
 ## Run
 
 ```
