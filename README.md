@@ -18,7 +18,7 @@ python app.py
 
 ## 使用
 
-把JAP問題的 N x N 表格放入 data.csv 中，再導入至 table 中產生 jap class，或使用 jap(N, MAX_VAL) 來產生 jap 物件
+把JAP問題的 N x N 表格放入 data.csv 中，table[x][y] 表示工作 x 給機器 y 所花費成本，再導入至 table 中產生 jap class，或使用 jap(N, MAX_VAL) 來產生 jap 物件
 
 基因演算法參數如下
 ```
