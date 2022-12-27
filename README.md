@@ -44,8 +44,8 @@ gaParameter = {
 
 用 matplotlib 畫的圖都存在 ./figure 下
 - best : 有幾個 loops 就有幾張圖片，爲基因演算法每代當前的最佳答案所花費之成本
-  + ![image](https://github.com/c4t0212/job_assignment_problem/blob/f3d71fa6cf7ed25d31296d9f635248569277b983/figure/best/loop00.png)
+  + ![image](figure/best/loop00.png)
 - minmax : 同 best ，內容改爲每代中最大和最小的成本
-  + ![image](https://github.com/c4t0212/job_assignment_problem/blob/f3d71fa6cf7ed25d31296d9f635248569277b983/figure/minmax/loop00.png)
+  + ![image](figure/minmax/loop00.png)
 - every-loop-best.png : 每次基因演算法找到最佳解的值
-  + ![image](https://github.com/c4t0212/job_assignment_problem/blob/f3d71fa6cf7ed25d31296d9f635248569277b983/figure/every-loop-best.png)
+  + ![image](figure/every-loop-best.png)
