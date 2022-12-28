@@ -4,16 +4,14 @@
 
 ## Requirements
 
-- shutil
-- numpy
-- scipy
-- matplotlib
-- pytest (如果你要測的話)
+- Python 3.11+
+- Pipenv
 
 ## Run
 
 ```
-python app.py
+1. pipenv install
+2. pipenv run python app.py
 ```
 
 ## 使用
