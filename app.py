@@ -43,19 +43,19 @@ def draw_plt(bestSolTime: list):
 if __name__ == '__main__':
     table = None
     try:
-        with open('data.csv', 'r') as f:
+        with open('data.csv', 'r', newline='') as f:
             csvReader = csv.reader(f)
             table = list(csvReader)
     except:
         pass
 
     japProblem = jap(table)
-    # japProblem = jap(None, N=10, MAX_VAL=20)
+    # japProblem = jap(None, N=15, MAX_VAL=20)
 
     gaParameter = {
-        'liveLoops' : 20,
+        'liveLoops' : 30,
         'jap' : japProblem,
-        'popSize' : 50,
+        'popSize' : 60,
         'geneSize' : len(japProblem.timeTable),
         'mutationRate' : 0.1,
         'mutationType' : mutation_type.Inversion,
@@ -63,7 +63,7 @@ if __name__ == '__main__':
         'crossoverType' : crossover_type.PartialCrossover
     }
 
-    loops = 10
+    loops = 15
     data = []
     bestSolTime = []
     remove_exist_file()
